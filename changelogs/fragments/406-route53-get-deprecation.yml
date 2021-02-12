@@ -1,0 +1,2 @@
+deprecated_features:
+- route53 - using ``state=get`` to fetch records has been deprecated and will be removed after 2022-09-01 (PR link).

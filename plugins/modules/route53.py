@@ -21,6 +21,7 @@ options:
     description:
       - Specifies the state of the resource record. As of Ansible 2.4, the I(command) option has been changed
         to I(state) as default and the choices C(present) and C(absent) have been added, but I(command) still works as well.
+      - The 'get' option has been deprecated and removed after 2022-09-01. Please use the route53_info module instead.
     required: true
     aliases: [ 'command' ]
     choices: [ 'present', 'absent', 'get', 'create', 'delete' ]
@@ -476,6 +477,9 @@ def main():
     elif module.params['state'] in ('absent', 'delete'):
         command_in = 'delete'
     elif module.params['state'] == 'get':
+        module.deprecate('The state get option has been deprecated and'
+                         ' will be removed after 2022-09-01',
+                         date='2022-09-01', collection_name='community.aws')
         command_in = 'get'
 
     zone_in = (module.params.get('zone') or '').lower()
